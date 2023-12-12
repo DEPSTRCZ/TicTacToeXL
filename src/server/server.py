@@ -11,6 +11,7 @@ class Server:
     def __init__(self, **kwargs):
 
         self.__host = kwargs['host'] if 'host' in kwargs else socket.gethostname()
+        print(socket.gethostname())
         self.__port = kwargs['port'] if 'port' in kwargs else 5000
 
         self.__server_socket = socket.socket()  # get instance
@@ -34,18 +35,20 @@ class Server:
                 case _ : return None
 
     def listen(self):
+        
         print("Listening...")
         self.__server_socket.listen(2)
         self.__conn, self.__address = self.__server_socket.accept()
-
+        print(self.__conn)
         while True:
             self.__recieved_data = self.__conn.recv(1024).decode()
             if not self.__recieved_data:
                 break
             print("<- " + str(self.__recieved_data))
-                
-        self.__conn.close()
+
+            self.__conn.close()
 
 if __name__ == '__main__':
-    server = Server()
+    server = Server(host="192.168.253.49")
+
     server.listen()
