@@ -49,6 +49,6 @@ class Server:
             self.__conn.close()
 
 if __name__ == '__main__':
-    server = Server(host="192.168.253.49")
+    server = Server()
 
     server.listen()
